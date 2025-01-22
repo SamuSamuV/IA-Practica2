@@ -127,10 +127,8 @@ namespace Assets.Scripts
             {
                     case MoveDirection.Up: MoveUp(); break;
                     case MoveDirection.Down: MoveDown(); break;
-                    case MoveDirection.Left: MoveLeft();
-                        break;
-                    case MoveDirection.Right: MoveRight();
-                        break;
+                    case MoveDirection.Left: MoveLeft(); break;
+                    case MoveDirection.Right: MoveRight(); break;
 
 
                 case MoveDirection.None:

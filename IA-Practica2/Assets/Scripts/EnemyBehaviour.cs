@@ -40,9 +40,5 @@ namespace Assets.Scripts
                     LocomotionController.CurrentEndPosition(), null));
             }
         }
-
-
-
-
     }
 }
