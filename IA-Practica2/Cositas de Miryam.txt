@@ -1,0 +1,9 @@
+1. Hacer una variable con la distancia del inicio a la celda, del objetivo a la celda, 
+
+2. Un script que se encargue de abrir los nodos y otro de cerrarlos
+
+3. Otro que se encargue de pasarle a la mente las casillas para que ya piense para establecer el camino
+
+4. Cada nodo tiene una casilla
+
+https://youtu.be/-L-WgKMFuhE?si=QUbZUZVVLcbIRpel
