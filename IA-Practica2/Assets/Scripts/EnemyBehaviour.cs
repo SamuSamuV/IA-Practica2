@@ -34,8 +34,6 @@ namespace Assets.Scripts
             if (BoardManager == null) return;
             if (LocomotionController.MoveNeed)
             {
-
-
                 LocomotionController.SetNewDirection(PathController.GetNextMove(BoardManager.boardInfo,
                     LocomotionController.CurrentEndPosition(), null));
             }

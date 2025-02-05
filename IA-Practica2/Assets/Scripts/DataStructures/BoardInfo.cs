@@ -15,7 +15,6 @@ namespace Assets.Scripts.DataStructures
             this.NumRows = rows;
             this.CellInfos = new CellInfo[columns, rows];
             this.manager = manager;
-
         }
 
         private BoardManager manager;
@@ -179,8 +178,6 @@ namespace Assets.Scripts.DataStructures
                 //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
                 LayoutItemsAtRandom(leverCount.minimum, leverCount.maximum);
             }
-
-           
 
             LayoutGoalAtRandom(forPlanner);
             if (enemyCount > 0)

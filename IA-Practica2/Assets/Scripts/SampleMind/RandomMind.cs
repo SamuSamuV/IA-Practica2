@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.SampleMind
 {
-    public class RandomMind : AbstractPathMind
+    public class RandomMind : MonoBehaviour//AbstractPathMind
     {
-        public override Locomotion.MoveDirection GetNextMove(BoardInfo boardInfo, CellInfo currentPos, CellInfo[] goals)
+        /*public override Locomotion.MoveDirection GetNextMove(BoardInfo boardInfo, CellInfo currentPos, CellInfo[] goals)
         {
             Locomotion.MoveDirection selectedDirection;
             bool validMove = false;
@@ -22,6 +22,6 @@ namespace Assets.Scripts.SampleMind
 
 
             return valid;
-        }
+        }*/
     }
 }

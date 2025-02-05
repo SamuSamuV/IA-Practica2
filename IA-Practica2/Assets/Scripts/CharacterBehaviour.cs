@@ -20,9 +20,6 @@ namespace Assets.Scripts
             PathController.SetCharacter(this);
             LocomotionController = GetComponent<Locomotion>();
             LocomotionController.SetCharacter(this);
-
-            
-
         }
 
         void Update()
@@ -35,17 +32,15 @@ namespace Assets.Scripts
                 LocomotionController.SetNewDirection(PathController.GetNextMove(boardClone,LocomotionController.CurrentEndPosition(),new [] {this.currentTarget}));
             }
 
-            RayCastLogic();
+            //RayCastLogic();
         }
-
-       
 
         public void SetCurrentTarget(CellInfo newTargetCell)
         {
             this.currentTarget = newTargetCell;
         }
 
-        public void RayCastLogic()
+        /*public void RayCastLogic()
         {
             Vector2[] directions = { Vector2.up, Vector2.down, Vector2.right, Vector2.left };
 
@@ -55,7 +50,7 @@ namespace Assets.Scripts
 
                 Debug.DrawRay(transform.position, dir * rayDistance, Color.white);
             }
-        }
+        }*/
     }
 }
 

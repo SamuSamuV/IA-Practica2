@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
+    //NO HAY QUE TOCARLO
     public class Locomotion : MonoBehaviour
     {
         public enum MoveDirection
