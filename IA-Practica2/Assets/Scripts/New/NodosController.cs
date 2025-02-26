@@ -12,15 +12,15 @@ public class NodosController : MonoBehaviour
     public List<GameObject> itemsList = new List<GameObject>();
     public List<GameObject> enemyList = new List<GameObject>();
 
-    public void PopulateNodesList() //Este método se llama para poblar la lista con todos los objetos que tengan el script de Nodos
+    public void PopulateNodesList()
     {
-        nodosList.Clear(); //Limpiamos la lista para asegurarnos de que no haya nodos repetidos
+        nodosList.Clear();
 
-        Nodes[] nodesArray = FindObjectsOfType<Nodes>(); //Obtenemos todos los objetos con el script Nodos en la escena
+        Nodes[] nodesArray = FindObjectsOfType<Nodes>(); 
 
         foreach (var node in nodesArray)
         {
-            nodosList.Add(node); //Agregamos todos los nodos encontrados a la lista
+            nodosList.Add(node); 
         }
     }
     public void PopulateObstaclesList() 
@@ -72,7 +72,7 @@ public class NodosController : MonoBehaviour
     }
     private void Start()
     {
-        PopulateNodesList();
+        PopulateAllLists();
     }
     void Update()
     {
