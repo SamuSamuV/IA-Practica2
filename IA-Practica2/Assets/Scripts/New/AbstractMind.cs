@@ -20,8 +20,6 @@ public class AbstractMind : AbstractPathMind
 
     public bool CheckifMoveIsValid(bool valid)
     {
-
-
         return valid;
     }
 }
