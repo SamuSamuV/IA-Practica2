@@ -13,7 +13,7 @@ public class Pathfinding
 
     public Pathfinding(int width, int height)
     {
-        grid = new BoardManager<PathNode>(width, height, 10f, Vector3.zero, (BoardManager<PathNode> g, int x, int y) => new PathNode(g, x, y));
+        //grid = new BoardManager<PathNode>(width, height, 10f, Vector3.zero, (BoardManager<PathNode> g, int x, int y) => new PathNode(g, x, y));
     }
 
     private List<Pathfinding> FindPath(int startX, int startY, int endX, int endY)
@@ -48,11 +48,75 @@ public class Pathfinding
                 return CalculatePath(endNode);
             }
 
+            openList.Remove(currentNode);
+            closedList.Add(currentNode);
 
+            foreach (PathNode neighbourNode in GetNeighbourList(currentNode))
+            {
+                if (closedList.Contains(neighbourNode)) continue;
+
+                int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
+                if (tentativeGCost < neighbourNode.gCost)
+                {
+                    neighbourNode.cameFromNode = currentNode;
+                    neighbourNode.gCost = tentativeGCost;
+                    neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
+                    neighbourNode.CalculateFCost();
+
+                    if (!openList.Contains(neighbourNode))
+                    {
+                        openList.Add(neighbourNode);
+                    }
+                }
+            }
         }
     }
 
-    private int CalcuculateDistanceCost(PNode a, PNode b)
+    private List<PathNode> GetNeighbourList(PathNode currentNode)
+    {
+        List<PathNode> neighbourList = new List<PathNode>();
+
+        if (currentNode.x - 1 >= 0)
+        {
+            // Left
+            neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y));
+            // Left Down
+            if (currentNode.y - 1 >= 0) 
+                neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
+            // Left Up
+            if (currentNode.y + 1 < grid.GetHeight()) 
+                neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
+        }
+        
+        if (currentNode.x + 1 < grid.GetWidth())
+        {
+            // Right
+            neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y));
+            // Right Down
+            if (currentNode.y - 1 >= 0) 
+                neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
+            // Right Up
+            if (currentNode.y + 1 < grid.GetHeight()) 
+                neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y + 1));
+        }
+        
+        // Down
+        if (currentNode.y - 1 >= 0) 
+            neighbourList.Add(GetNode(currentNode.x, currentNode.y - 1));
+        // Up
+        if (currentNode.y + 1 < grid.GetHeight()) 
+            neighbourList.Add(GetNode(currentNode.x, currentNode.y + 1));
+        
+        return neighbourList;
+        
+    }
+
+    private List<PathNode> CalculatePath(PathNode endNode)
+    {
+        return null;
+    }
+
+    private int CalcuculateDistanceCost(PathNode a, PathNode b)
     {
         int XDistance = Mathf.Abs(a.x - b.x);
         int YDistance = Mathf.Abs(a.y - b.y);
