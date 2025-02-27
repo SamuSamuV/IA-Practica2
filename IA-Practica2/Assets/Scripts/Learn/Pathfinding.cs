@@ -36,7 +36,7 @@ public class Pathfinding
         }
 
         startNode.gCost = 0;
-        startNode.hCost = CalcuculateDistanceCost(startNode, endNode);
+        startNode.hCost = CalculateDistanceCost(startNode, endNode);
         startNode.CalculateFCost();
 
         while(openList.Count > 0)
@@ -70,6 +70,9 @@ public class Pathfinding
                 }
             }
         }
+
+        //Out of nodes on the openList
+        return null;
     }
 
     private List<PathNode> GetNeighbourList(PathNode currentNode)
@@ -116,7 +119,7 @@ public class Pathfinding
         return null;
     }
 
-    private int CalcuculateDistanceCost(PathNode a, PathNode b)
+    private int CalculateDistanceCost(PathNode a, PathNode b)
     {
         int XDistance = Mathf.Abs(a.x - b.x);
         int YDistance = Mathf.Abs(a.y - b.y);
