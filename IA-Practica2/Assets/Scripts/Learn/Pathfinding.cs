@@ -6,7 +6,7 @@ using Assets.Scripts;
 public class Pathfinding
 {
     private const int MOVE_STRAIGHT_COST = 10;
-    private const int MOVE_DIAGONAL_COST = 14;
+    //private const int MOVE_DIAGONAL_COST = 14;
 
     private BoardManager grid;
     private List<PathNode> openList;
@@ -20,8 +20,8 @@ public class Pathfinding
 
     private List<Pathfinding> FindPath(int startX, int startY, int endX, int endY)
     {
-        PathNode startNode = grid.GetGridObject(startX, startY);
-        PathNode endNode = grid.GetGridObject(endX, endY);
+        PathNode startNode = grid.GetGridObject(startX, startY);//posicion inicial de la partida
+        PathNode endNode = grid.GetGridObject(endX, endY);//posicion final de la partida
 
         openList = new List<PathNode> { startNode };
         closedList = new List<PathNode>();
@@ -32,22 +32,23 @@ public class Pathfinding
             {
                 PathNode pathNode = grid.GetGridObject(x, y);
                 pathNode.gCost = int.MaxValue;
-                pathNode.CalculateFCost();
+                //pathNode.CalculateFCost();
                 pathNode.cameFromNode = null;
             }
         }
 
         startNode.gCost = 0;
         startNode.hCost = CalculateDistanceCost(startNode, endNode);
-        startNode.CalculateFCost();
+        //startNode.CalculateFCost();
 
-        while(openList.Count > 0)
+        while (openList.Count > 0)
         {
             PathNode currentNode = GetLowestFCostNode(openList);
             if (currentNode == endNode)
             {
                 //Reached final node
-                return CalculatePath(endNode);
+                //return CalculatePath(endNode);
+
             }
 
             openList.Remove(currentNode);
@@ -63,7 +64,7 @@ public class Pathfinding
                     neighbourNode.cameFromNode = currentNode;
                     neighbourNode.gCost = tentativeGCost;
                     neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
-                    neighbourNode.CalculateFCost();
+                    //neighbourNode.CalculateFCost();
 
                     if (!openList.Contains(neighbourNode))
                     {
@@ -115,27 +116,32 @@ public class Pathfinding
         return neighbourList;
         
     }
-
-    private List<PathNode> CalculatePath(PathNode endNode)
+    public PathNode GetNode(int nodeX, int nodeY)
     {
-        List<PathNode> path = new List<PathNode>();
-        path.Add(endNode);
-        PathNode currentNode = endNode;
-        while (currentNode.cameFromNode != null)
-        {
-            path.Add(currentNode.cameFromNode);
-            currentNode = currentNode.cameFromNode;
-        }
-        path.Reverse();
-        return path;
+        //nose 
+        return null;
     }
+
+    //private List<PathNode> CalculatePath(PathNode endNode)
+    //{
+    //    List<PathNode> path = new List<PathNode>();
+    //    path.Add(endNode);
+    //    PathNode currentNode = endNode;
+    //    while (currentNode.cameFromNode != null)
+    //    {
+    //        path.Add(currentNode.cameFromNode);
+    //        currentNode = currentNode.cameFromNode;
+    //    }
+    //    path.Reverse();
+    //    return path;
+    //}
 
     private int CalculateDistanceCost(PathNode a, PathNode b)
     {
         int XDistance = Mathf.Abs(a.X - b.X);
         int YDistance = Mathf.Abs(a.Y - b.Y);
         int remaining = Mathf.Abs(XDistance - YDistance);
-        return MOVE_DIAGONAL_COST * Mathf.Min(XDistance, YDistance) + MOVE_STRAIGHT_COST * remaining;
+        return MOVE_STRAIGHT_COST * remaining;
     }
 
     private PathNode GetLowestFCostNode(List<PathNode> pathNodeList)

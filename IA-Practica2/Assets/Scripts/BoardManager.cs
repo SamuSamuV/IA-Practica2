@@ -45,7 +45,19 @@ namespace Assets.Scripts
 
         public const float TileSize = 1.0f;
 
-
+        public PathNode GetGridObject(int nodeX, int nodeY)
+        {
+            //con el nodex y nodey, tenemos que ubicar donde esta la casilla, cual es. 
+            return null;
+        }
+        public int GetHeight()
+        { 
+            return 0;
+        }
+        public int GetWidth()
+        {
+            return 0;
+        }
         public void SetupScene(int seed, bool forPlanner, int enemyCount)
         {
             this.boardInfo = new BoardInfo(columns, rows, this);
