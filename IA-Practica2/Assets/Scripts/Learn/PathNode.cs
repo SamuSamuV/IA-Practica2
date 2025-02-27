@@ -1,32 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts;
+using Assets.Scripts.DataStructures;
 
 public class PathNode
 {
-    private BoardManager<PathNode> grid;
-    public int x;
-    public int y;
+    private BoardManager grid;
+    private CellInfo cellInfo;
+    private PathNode parentNode;
 
     public int gCost;
     public int hCost;
-    public int fCost;
+    public int fCost => gCost + hCost;
 
     public PathNode cameFromNode;
-    public PathNode(BoardManager<PathNode> grid, int x, int y)
+    public int X => this.cellInfo.ColumnId;
+    public int Y => this.cellInfo.RowId;
+
+    public PathNode(BoardManager grid, CellInfo cell)
     {
         this.grid = grid;
-        this.x = x;
-        this.y = y;
+        this.cellInfo = cell;
+       
     }
 
-    public void CalculateFCost()
-    {
-        fCost = gCost + hCost;
-    }
+
 
     public override string ToString()
     {
-        return x + "," + y;
+        return X + "," + Y;
     }
 }
