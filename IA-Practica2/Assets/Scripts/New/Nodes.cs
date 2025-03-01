@@ -6,16 +6,14 @@ public class Nodes : MonoBehaviour
 {
     //Cada casillla tiene un nodo.
     //Como referencia al personaje: Calcular distancia origen, distancia a la casilla de fin y la suma de las dos.
-    int DistCharacter;
-    int DistEnd;
-    int DistSum;
 
-    void Start()
-    {
-        
-    }
-    void Update()
-    {
-        
-    }
+    public Nodes Connection { get; private set; }
+    public float G { get; private set; }
+    public float H { get; private set; }
+    public float F => G + H;
+
+    public void SetConnection(Nodes nodes) => Connection = nodes;
+
+    public void SetG(float g) => G = g;
+    public void SetH(float h) => H = h;
 }
