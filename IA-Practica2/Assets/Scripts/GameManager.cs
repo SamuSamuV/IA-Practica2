@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.DataStructures;
+using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -12,6 +14,8 @@ namespace Assets.Scripts
         public bool ForPlanner = false;
         public int numEnemies;
 
+        private NodePath startNode, endNode;
+        private CellInfo startCell;
         public List<GameObject> ActiveEnemies ;
 
         void Awake()
@@ -40,6 +44,8 @@ namespace Assets.Scripts
             var character= GameObject.Find("Character").GetComponent<CharacterBehaviour>();
             character.BoardManager= BoardManager;
             character.SetCurrentTarget(BoardManager.boardInfo.Exit);
+            startCell = character.BoardManager.boardInfo.CellInfos[0, 0]; //Añadido, lo suponemos
+            GetExit();
         }
 
         //Initializes the game for each level.
@@ -49,6 +55,16 @@ namespace Assets.Scripts
             //Call the SetupScene function of the BoardManager script, pass it current level number.
             BoardManager.SetupScene(this.seed, this.ForPlanner,numEnemies);
             BoardManager.GenerateMap();
+        }
+        private void GetExit()
+        {
+            endNode.cellInfo = BoardManager.boardInfo.Exit; //Se asigna la posición final
+            startNode.cellInfo = startCell; //Se asigina la posición inicial
+
+            endNode = new NodePath();
+            startNode = new NodePath();
+
+            var path = PathFinding.FindPath(startNode, endNode);
         }
     }
 }
