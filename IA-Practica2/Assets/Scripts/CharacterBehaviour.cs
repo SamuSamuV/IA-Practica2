@@ -40,6 +40,11 @@ namespace Assets.Scripts
             this.currentTarget = newTargetCell;
         }
 
+        public CellInfo GetTarget() //podemos hacerlo????
+        {
+            return this.currentTarget;
+        }
+
         /*public void RayCastLogic()
         {
             Vector2[] directions = { Vector2.up, Vector2.down, Vector2.right, Vector2.left };

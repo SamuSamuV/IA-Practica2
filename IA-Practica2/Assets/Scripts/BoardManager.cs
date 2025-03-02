@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Tiles;
 using Assets.Scripts.DataStructures;
+using Tarodev_Pathfinding._Scripts;
+using Tarodev_Pathfinding._Scripts.Grid.Scriptables;
 using UnityEngine;
 //Allows us to use Lists.
 using Random = UnityEngine.Random; //Tells Random to use the Unity Engine random number generator.
@@ -27,6 +30,7 @@ namespace Assets.Scripts
             }
         }
 
+        public Dictionary<Vector2, NodePath> Tiles { get; private set; }
 
         public int columns = 10; //Number of columns in our game board.
         public int rows = 10; //Number of rows in our game board.
@@ -40,24 +44,26 @@ namespace Assets.Scripts
         public GameObject enemyTile; //Enemy Tile
         public GameObject outerWallTile; //Array of outer tile prefabs.
 
-        private Transform boardHolder; //A variable to store a reference to the transform of our Board object.
         public BoardInfo boardInfo;
-
+        
         public const float TileSize = 1.0f;
 
-        public PathNode GetGridObject(int nodeX, int nodeY)
-        {
-            //con el nodex y nodey, tenemos que ubicar donde esta la casilla, cual es. 
-            return null;
-        }
-        public int GetHeight()
-        { 
-            return 0;
-        }
-        public int GetWidth()
-        {
-            return 0;
-        }
+        private CharacterBehaviour characterBehaviour;
+
+        //public PathNode GetGridObject(int nodeX, int nodeY)
+        //{
+        //    //con el nodex y nodey, tenemos que ubicar donde esta la casilla, cual es. 
+        //    return null;
+        //}
+        //public int GetHeight()
+        //{ 
+        //    return 0;
+        //}
+        //public int GetWidth()
+        //{
+        //    return 0;
+        //}
+
         public void SetupScene(int seed, bool forPlanner, int enemyCount)
         {
             this.boardInfo = new BoardInfo(columns, rows, this);
@@ -69,6 +75,7 @@ namespace Assets.Scripts
         {
             this.boardInfo.CreateGameObject(this);
         }
+        
     }
 
 
